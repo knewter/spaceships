@@ -1,10 +1,10 @@
 defmodule Spaceships.Ship.State do
   @time_units_per_second 1000000000
 
-  defstruct x: 0,
-            y: 0,
-            v: 0,
-            angle: 0,
+  defstruct x: 0.0,
+            y: 200.0,
+            v: 0.0,
+            angle: 0.0,
             last_update: nil
 
   def tick(state, new_time) do
