@@ -1,0 +1,2 @@
+defmodule Spaceships do
+end
