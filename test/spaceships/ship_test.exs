@@ -10,7 +10,7 @@ defmodule Spaceships.ShipTest do
     assert %Spaceships.Ship.State{} = Spaceships.Ship.get_state(pid)
   end
 
-  test "ships move based on their v" do
+  test "ships move based on their v and angle" do
     {:ok, pid} = Spaceships.Ship.start_link
     Spaceships.Ship.accelerate(pid, 0.1)
     :timer.sleep(1000)

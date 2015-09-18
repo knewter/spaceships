@@ -26,9 +26,17 @@ defmodule Spaceships.Ship do
     GenServer.cast(pid, {:accelerate, amount})
   end
 
+  @doc """
+  Increase the ship's rotation by amount
+  """
+  def rotate(pid, amount) do
+    GenServer.cast(pid, {:rotate, amount})
+  end
+
   ## Server API
 
   def init(:ok) do
+    :random.seed
     :timer.send_after(@tick_interval, :tick)
     {:ok, %Spaceships.Ship.State{last_update: :erlang.system_time}}
   end
@@ -39,6 +47,10 @@ defmodule Spaceships.Ship do
 
   def handle_cast({:accelerate, amount}, state) do
     {:noreply, update_in(state.v, &(&1 + amount))}
+  end
+
+  def handle_cast({:rotate, amount}, state) do
+    {:noreply, update_in(state.angle, &(&1 + amount))}
   end
 
   def handle_info(:tick, state) do
