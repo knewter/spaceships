@@ -38,7 +38,8 @@ defmodule Spaceships.Ship do
   def init(:ok) do
     :random.seed
     :timer.send_after(@tick_interval, :tick)
-    {:ok, %Spaceships.Ship.State{last_update: :erlang.system_time}}
+    id = :rand.uniform
+    {:ok, %Spaceships.Ship.State{last_update: :erlang.system_time, id: id}}
   end
 
   def handle_call(:get_state, _from, state) do

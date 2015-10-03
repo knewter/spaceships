@@ -5,7 +5,8 @@ defmodule Spaceships.Ship.State do
             y: 200.0,
             v: 0.0,
             angle: 0.0,
-            last_update: nil
+            last_update: nil,
+            id: 0
 
   def tick(state, new_time) do
     delta_t = new_time - state.last_update
