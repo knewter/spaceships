@@ -1,9 +1,10 @@
-defmodule Basic do
+defmodule TCPExample do
   @new_ship_spawn_timing 1000
   @port 8400
 
   def run do
     {:ok, pid} = Spaceships.State.start_link
+    spawn(fn() -> Spaceships.Window.start(pid) end)
     spawn(fn() -> Spaceships.TCPServer.listen(@port, pid) end)
     loop(pid)
   end
@@ -36,4 +37,4 @@ defmodule Basic do
   end
 end
 
-Basic.run
+TCPExample.run
