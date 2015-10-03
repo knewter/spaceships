@@ -41,6 +41,13 @@ defmodule Spaceships.TCPServer do
   def render_ship(ship) do
     vector_x = :math.cos ship.angle
     vector_y = :math.sin ship.angle
-    Enum.join([ship.id, ship.x, ship.y, vector_x, vector_y], "=")
+    [
+      ship.id,
+      Float.to_string(ship.x, decimals: 2),
+      Float.to_string(ship.y, decimals: 2),
+      Float.to_string(vector_x, decimals: 2),
+      Float.to_string(vector_y, decimals: 2)
+    ]
+    |> Enum.join("=")
   end
 end

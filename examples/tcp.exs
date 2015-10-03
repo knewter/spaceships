@@ -1,9 +1,10 @@
 defmodule Basic do
   @new_ship_spawn_timing 1000
+  @port 8400
 
   def run do
     {:ok, pid} = Spaceships.State.start_link
-    spawn(fn() -> Spaceships.TCPServer.listen(8401, pid) end)
+    spawn(fn() -> Spaceships.TCPServer.listen(@port, pid) end)
     loop(pid)
   end
 
