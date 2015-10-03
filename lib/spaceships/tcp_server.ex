@@ -42,8 +42,8 @@ defmodule Spaceships.TCPServer do
     vector_y = :math.sin ship.angle
     "#{ship.id}=" <>
     Enum.join([
-      Float.to_string(ship.x, decimals: 2),
-      Float.to_string(ship.y, decimals: 2),
+      Float.to_string(400+ship.x, decimals: 2),
+      Float.to_string(400+ship.y, decimals: 2),
       Float.to_string(vector_x, decimals: 2),
       Float.to_string(vector_y, decimals: 2)
     ], ",")
