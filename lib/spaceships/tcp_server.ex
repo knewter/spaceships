@@ -23,7 +23,6 @@ defmodule Spaceships.TCPServer do
         Spaceships.State.get_ships(state_pid)
         |> render_ships
         |> tcp_send(socket)
-        :timer.sleep(10)
         loop(socket, state_pid)
     end
   end
@@ -41,13 +40,12 @@ defmodule Spaceships.TCPServer do
   def render_ship(ship) do
     vector_x = :math.cos ship.angle
     vector_y = :math.sin ship.angle
-    [
-      ship.id,
+    "#{ship.id}=" <>
+    Enum.join([
       Float.to_string(ship.x, decimals: 2),
       Float.to_string(ship.y, decimals: 2),
       Float.to_string(vector_x, decimals: 2),
       Float.to_string(vector_y, decimals: 2)
-    ]
-    |> Enum.join("=")
+    ], ",")
   end
 end
