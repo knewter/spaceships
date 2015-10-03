@@ -16,11 +16,16 @@ defmodule Spaceships.TCPServer do
   end
 
   def loop(socket, state_pid) do
-    Spaceships.State.get_ships(state_pid)
-    |> render_ships
-    |> tcp_send(socket)
-    :timer.sleep(10)
-    loop(socket, state_pid)
+    case :gen_tcp.recv(socket, 0) do
+      {:ok, "quit\r\n"} -> :ok
+      {:ok, data} ->
+        IO.puts inspect data
+        Spaceships.State.get_ships(state_pid)
+        |> render_ships
+        |> tcp_send(socket)
+        :timer.sleep(10)
+        loop(socket, state_pid)
+    end
   end
 
   def tcp_send(data, socket) do
